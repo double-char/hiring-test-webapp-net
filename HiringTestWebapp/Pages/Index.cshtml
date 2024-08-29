@@ -1,0 +1,42 @@
+﻿@page
+@model HiringTestWebapp.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <form method="post">
+        <div>
+            <p>Please select an algorithm</p>
+
+            <select name="strategy">
+                <option value="">Select a strategy</option>
+
+                @foreach (var strategy in Model.Strategies)
+                {
+                    <option value="@strategy.Value">@strategy.Text</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <p>Please insert your string</p>
+
+            <input type="text" name="input" placeholder="Lorem ipsum..." />
+        </div>
+
+        @Html.AntiForgeryToken()
+
+        <div style="margin-top: 20px;">
+            <button type="submit">Submit</button>
+        </div>
+
+        @if (Model.Result != null)
+        {
+            <h1>Result</h1>
+            <p>The result is: @Model.Result</p>
+        }
+    </form>
+</div>
